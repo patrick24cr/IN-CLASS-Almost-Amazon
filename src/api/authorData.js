@@ -28,8 +28,10 @@ const getSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
 
 // FIXME: DELETE AUTHOR
 const deleteSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/authors/${firebaseKey}.json`)
-    .then((response) => resolve(response.data))
+  axios.delete(`${dbUrl}/authors/${firebaseKey}.json`)
+    .then(() => {
+      getAuthors().then((authorsArray) => resolve(authorsArray));
+    })
     .catch((error) => reject(error));
 });
 
