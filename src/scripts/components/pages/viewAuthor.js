@@ -16,7 +16,6 @@ const viewAuthor = (obj) => {
      <hr>  
     </div>
   </div>`;
-
   renderToDOM('#view', domString);
 
   let domStringBooks = '';
@@ -35,9 +34,7 @@ const viewAuthor = (obj) => {
         </div>
       </div>`;
   });
-
   renderToDOM('#store', domStringBooks);
-  console.warn(obj);
 };
 
 export default viewAuthor;

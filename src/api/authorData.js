@@ -16,6 +16,19 @@ const getAuthors = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+// FIXME:  GET FAVORITE AUTHORS
+const getFavoriteAuthors = () => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/authors.json?orderBy="favorite"&equalTo=true`)
+    .then((response) => {
+      if (response.data === null) {
+        resolve(null);
+      } else {
+        resolve(Object.values(response.data));
+      }
+    })
+    .catch((error) => reject(error));
+});
+
 // FIXME: CREATE AUTHOR
 const createAuthor = () => {};
 
@@ -52,4 +65,5 @@ export {
   deleteSingleAuthor,
   updateAuthor,
   getAuthorBooks,
+  getFavoriteAuthors,
 };

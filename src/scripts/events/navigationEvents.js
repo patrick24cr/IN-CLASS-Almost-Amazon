@@ -1,4 +1,4 @@
-import { getAuthors } from '../../api/authorData';
+import { getAuthors, getFavoriteAuthors } from '../../api/authorData';
 import { booksOnSale, getBooks } from '../../api/bookData';
 import { emptyAuthors, showAuthors } from '../components/pages/authors';
 import { showBooks } from '../components/pages/books';
@@ -29,6 +29,17 @@ const navigationEvents = () => {
   document.querySelector('#authors').addEventListener('click', () => {
     console.warn('CLICKED AUTHORS');
     getAuthors().then((authorsArray) => {
+      if (authorsArray === null) {
+        emptyAuthors();
+      } else {
+        showAuthors(authorsArray);
+      }
+    });
+  });
+  // work here tonight
+  document.querySelector('#favorite-authors').addEventListener('click', () => {
+    console.warn('CLICKED AUTHORS');
+    getFavoriteAuthors().then((authorsArray) => {
       if (authorsArray === null) {
         emptyAuthors();
       } else {
