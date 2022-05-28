@@ -40,7 +40,12 @@ const createBook = (bookObj) => new Promise((resolve, reject) => {
 });
 
 // TODO: UPDATE BOOK
-const updateBook = () => {};
+const updateBook = (firebaseKey, bookObj) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/books/${firebaseKey}.json`, bookObj)
+    .then(() => {
+      getBooks().then(resolve);
+    }).catch(reject);
+});
 
 // TODO: FILTER BOOKS ON SALE
 const booksOnSale = () => new Promise((resolve, reject) => {
