@@ -35,7 +35,6 @@ const getFavoriteAuthors = (uid) => new Promise((resolve, reject) => {
 const createAuthor = (authorObj, uid) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/authors.json`, authorObj)
     .then((response) => {
-      console.warn(response.data.name);
       const payload = { firebaseKey: response.data.name };
       axios.patch(`${dbUrl}/authors/${response.data.name}.json`, payload)
         .then(() => {
