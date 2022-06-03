@@ -15,7 +15,7 @@ const domEvents = (uid) => {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         const [, firebaseKey] = e.target.id.split('--');
-        deleteBook(firebaseKey).then((booksArray) => showBooks(booksArray));
+        deleteBook(firebaseKey, uid).then((booksArray) => showBooks(booksArray));
       }
     }
 
@@ -42,7 +42,7 @@ const domEvents = (uid) => {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         const [, firebaseKey] = e.target.id.split('--');
-        deleteAuthorBooks(firebaseKey).then(showAuthors);
+        deleteAuthorBooks(firebaseKey, uid).then(showAuthors);
         // deleteSingleAuthor(firebaseKey).then((authorsArray) => showAuthors(authorsArray));
       }
     }
