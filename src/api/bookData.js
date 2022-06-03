@@ -48,9 +48,12 @@ const updateBook = (firebaseKey, bookObj) => new Promise((resolve, reject) => {
 });
 
 // TODO: FILTER BOOKS ON SALE
-const booksOnSale = () => new Promise((resolve, reject) => {
+const booksOnSale = (uid) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}//books.json?orderBy="sale"&equalTo=true`)
-    .then((response) => resolve(Object.values(response.data)))
+    .then((response) => {
+      const filteredBooks = Object.values(response.data).filter((book) => book.uid === uid);
+      resolve(filteredBooks);
+    })
     .catch((error) => reject(error));
 });
 

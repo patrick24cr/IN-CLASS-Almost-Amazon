@@ -17,13 +17,14 @@ const getAuthors = (uid) => new Promise((resolve, reject) => {
 });
 
 // FIXME:  GET FAVORITE AUTHORS
-const getFavoriteAuthors = () => new Promise((resolve, reject) => {
+const getFavoriteAuthors = (uid) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/authors.json?orderBy="favorite"&equalTo=true`)
     .then((response) => {
       if (response.data === null) {
         resolve(null);
       } else {
-        resolve(Object.values(response.data));
+        const filteredAuthors = Object.values(response.data).filter((author) => author.uid === uid);
+        resolve(filteredAuthors);
       }
     })
     .catch((error) => reject(error));

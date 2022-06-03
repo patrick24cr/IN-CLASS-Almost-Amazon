@@ -13,7 +13,7 @@ const navigationEvents = (uid) => {
   // TODO: BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
     console.warn('CLICKED SALE BOOKS');
-    booksOnSale().then((saleBooksArray) => showBooks(saleBooksArray));
+    booksOnSale(uid).then((saleBooksArray) => showBooks(saleBooksArray));
   });
 
   // TODO: ALL BOOKS
@@ -39,7 +39,7 @@ const navigationEvents = (uid) => {
 
   document.querySelector('#favorite-authors').addEventListener('click', () => {
     console.warn('CLICKED AUTHORS');
-    getFavoriteAuthors().then((authorsArray) => {
+    getFavoriteAuthors(uid).then((authorsArray) => {
       if (authorsArray === null) {
         emptyAuthors();
       } else {
