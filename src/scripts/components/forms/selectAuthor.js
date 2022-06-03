@@ -7,8 +7,6 @@ const selectAuthor = (authorId, uid) => {
     <option value="">Select an Author</option>`;
 
   getAuthors(uid).then((authorsArray) => {
-    console.warn(uid);
-    console.warn(authorsArray);
     authorsArray.forEach((author) => {
       domString += `
           <option 
