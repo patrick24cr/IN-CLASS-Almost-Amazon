@@ -68,9 +68,12 @@ const updateAuthor = (firebaseKey, authorObj, uid) => new Promise((resolve, reje
 });
 
 // TODO: GET A SINGLE AUTHOR'S BOOKS
-const getAuthorBooks = (firebaseKey) => new Promise((resolve, reject) => {
+const getAuthorBooks = (firebaseKey, uid) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/books.json?orderBy="author_id"&equalTo="${firebaseKey}"`)
-    .then((response) => resolve(Object.values(response.data)))
+    .then((response) => {
+      const filteredResponse = Object.values(response.data).filter((item) => item.uid === uid);
+      resolve(filteredResponse);
+    })
     .catch((error) => reject(error));
 });
 
