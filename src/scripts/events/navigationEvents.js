@@ -5,7 +5,7 @@ import { showBooks } from '../components/pages/books';
 import signOut from '../helpers/auth/signOut';
 
 // navigation events
-const navigationEvents = () => {
+const navigationEvents = (uid) => {
   // LOGOUT BUTTON
   document.querySelector('#logout-button')
     .addEventListener('click', signOut);
@@ -19,7 +19,7 @@ const navigationEvents = () => {
   // TODO: ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
     console.warn('CLICKED ALL BOOKS');
-    getBooks().then((booksArray) => showBooks(booksArray));
+    getBooks(uid).then((booksArray) => showBooks(booksArray));
   });
 
   // FIXME: STUDENTS Create an event listener for the Authors
@@ -28,7 +28,7 @@ const navigationEvents = () => {
   // 3. If the array is empty because there are no authors, make sure to use the emptyAuthor function
   document.querySelector('#authors').addEventListener('click', () => {
     console.warn('CLICKED AUTHORS');
-    getAuthors().then((authorsArray) => {
+    getAuthors(uid).then((authorsArray) => {
       if (authorsArray === null) {
         emptyAuthors();
       } else {
@@ -36,7 +36,7 @@ const navigationEvents = () => {
       }
     });
   });
-  // work here tonight
+
   document.querySelector('#favorite-authors').addEventListener('click', () => {
     console.warn('CLICKED AUTHORS');
     getFavoriteAuthors().then((authorsArray) => {
