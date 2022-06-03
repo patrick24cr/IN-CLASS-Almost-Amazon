@@ -28,7 +28,6 @@ const domEvents = (uid) => {
     if (e.target.id.includes('edit-book-btn')) {
       const [, firebaseKey] = e.target.id.split('--');
       getSingleBook(firebaseKey).then((bookObj) => {
-        console.warn(bookObj);
         addBookForm(bookObj, uid);
       });
     }

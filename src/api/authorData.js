@@ -32,14 +32,14 @@ const getFavoriteAuthors = (uid) => new Promise((resolve, reject) => {
 
 // FIXME: CREATE AUTHOR
 
-const createAuthor = (authorObj) => new Promise((resolve, reject) => {
+const createAuthor = (authorObj, uid) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/authors.json`, authorObj)
     .then((response) => {
       console.warn(response.data.name);
       const payload = { firebaseKey: response.data.name };
       axios.patch(`${dbUrl}/authors/${response.data.name}.json`, payload)
         .then(() => {
-          getAuthors().then(resolve);
+          getAuthors(uid).then(resolve);
         });
     }).catch(reject);
 });
@@ -52,19 +52,19 @@ const getSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 // FIXME: DELETE AUTHOR
-const deleteSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
+const deleteSingleAuthor = (firebaseKey, uid) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/authors/${firebaseKey}.json`)
     .then(() => {
-      getAuthors().then((authorsArray) => resolve(authorsArray));
+      getAuthors(uid).then((authorsArray) => resolve(authorsArray));
     })
     .catch((error) => reject(error));
 });
 
 // FIXME: UPDATE AUTHOR
-const updateAuthor = (firebaseKey, authorObj) => new Promise((resolve, reject) => {
+const updateAuthor = (firebaseKey, authorObj, uid) => new Promise((resolve, reject) => {
   axios.patch(`${dbUrl}/authors/${firebaseKey}.json`, authorObj)
     .then(() => {
-      getAuthors().then(resolve);
+      getAuthors(uid).then(resolve);
     }).catch(reject);
 });
 

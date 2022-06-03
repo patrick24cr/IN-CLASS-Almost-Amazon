@@ -17,7 +17,6 @@ const startApp = (user) => {
 
   // TODO: Put all books on the DOM on App load
   getBooks(user.uid).then((booksArray) => showBooks(booksArray));
-  console.warn(user.uid);
 };
 
 export default startApp;
